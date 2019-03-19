@@ -1,0 +1,55 @@
+﻿@model PokerHandBayshoreCodeTest.Models.Home.HandCheck
+
+@{
+    ViewBag.Title = "HandCheck";
+}
+
+<h2>Poker Hand Checker</h2>
+
+@if (Model != null)
+{
+	<div>The hand you input was <b>@Model.HandString</b></div>
+
+	if (Model.ValidInput)
+	{
+		<div>@Model.HandValueString</div>
+	}
+	else
+	{
+	<div>
+		We had difficulty interpreting your input, please try again following the conventions below
+	</div>
+	}
+	<br />
+}
+
+
+<div>
+	Enter in a text representation of a 5 card poker hand, and click the button below to evaluate the best available hand. 
+</div>
+<br />
+<div>
+	Cards are represented as a two to three (for tens) character string, starting with listing the value of the card (with the first letter of the card name used for face cards or Aces), 
+	and then the first letter of the suit (s for Spades, c for Clubs, h for Hearts, d for Diamonds).
+</div>
+<br />
+<div>
+	Please enter a hand by including 5 cards each separated by a space
+</div>
+<br />
+<div>
+	Examples: <br />
+	Kh = King of Hearts<br />
+	10c = 10 of Clubs <br />
+	7d = 7 of Diamonds <br />
+	As = Ace of Spades
+</div>
+<br />
+
+<div>
+	<form>
+		<input type="text" name="input" id="input" />
+
+		<button type="submit">Check Hand</button>
+	</form>
+</div>
