@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokerHandBayshoreCodeTest.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +30,7 @@ namespace PokerHandBayshoreCodeTest.Models.Home
                 var parsedCards = new List<Card>();
                 foreach (var str in cardStrings)
                 {
-                    var newCard = Card.TryParseCard(str);
+                    var newCard = Helpers.TryParseCard(str);
                     if (newCard == null)
                     {
                         ValidInput = false;

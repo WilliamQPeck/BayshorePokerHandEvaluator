@@ -4,7 +4,7 @@
     ViewBag.Title = "HandCheck";
 }
 
-<h2>Poker Hand Checker</h2>
+<h1>Poker Hand Checker</h1>
 
 @if (Model != null)
 {
@@ -12,18 +12,23 @@
 
 	if (Model.ValidInput)
 	{
-		<div>@Model.HandValueString</div>
+		<div>Hand Rank: @Model.HandValueString</div>
 	}
 	else
 	{
 	<div>
-		We had difficulty interpreting your input, please try again following the conventions below
+		@if (Model.HandValueString != null) {
+			@(Model.HandValueString)
+		}
+		else{
+			@:We had diffficulty interpreting your input, please try again following the conventions below
+		}
 	</div>
 	}
 	<br />
 }
 
-
+<h3>Instructions</h3>
 <div>
 	Enter in a text representation of a 5 card poker hand, and click the button below to evaluate the best available hand. 
 </div>

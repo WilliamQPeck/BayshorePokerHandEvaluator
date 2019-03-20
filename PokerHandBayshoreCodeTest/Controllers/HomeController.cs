@@ -9,11 +9,6 @@ namespace PokerHandBayshoreCodeTest.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult HandCheck(string input)
         {
             if(input == null)
