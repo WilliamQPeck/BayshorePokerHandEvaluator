@@ -15,6 +15,11 @@ namespace PokerHandBayshoreCodeTest.Models.Home
             Cards = new List<Card>();
         }
 
+        public PokerHand(List<Card> cards)
+        {
+            Cards = cards;
+        }
+
         public string BestHandString()
         {
             bool straight = HasStraight();
@@ -63,7 +68,7 @@ namespace PokerHandBayshoreCodeTest.Models.Home
             // Now two pair
             if(pairs.Count > 1)
             {
-                return $"Two pair, {pairs[0].ToString()}s and {pairs[1].ToString()}s";
+                return $"Two pair: {pairs[0].ToString()}s and {pairs[1].ToString()}s";
             }
 
             // Finally, a lowly pair
@@ -76,9 +81,9 @@ namespace PokerHandBayshoreCodeTest.Models.Home
             return $"High card: {highCard.Value.ToString()} of {highCard.Suit.ToString()}";
         }
         
-        #region Hand Evaluation Methods
+        #region Hand Evaluation Helper Methods
 
-        // If the cards are sequential, we have a straight. This means all different values
+        // If the cards are sequential, we have a straight. This means all different values over a range of 5 cards
         public bool HasStraight()
         {
             bool allDifferentValues = !Cards.GroupBy(x => x.Value).Select(y => y.Count()).Any(z => z > 1);
@@ -101,7 +106,7 @@ namespace PokerHandBayshoreCodeTest.Models.Home
                 var wheelMinVal = newHand.Select(x => x.Value).Min();
                 var wheelMaxVal = newHand.Select(x => x.Value).Max();
 
-                if((int)wheelMaxVal - (int)wheelMinVal == 3)
+                if((int)wheelMaxVal - (int)wheelMinVal == 3 && wheelMinVal == CardValue.Two && maxVal == CardValue.Ace)
                 {
                     return true;
                 }

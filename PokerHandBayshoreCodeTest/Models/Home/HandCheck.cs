@@ -17,31 +17,37 @@ namespace PokerHandBayshoreCodeTest.Models.Home
             ValidInput = true;
 
             var cardStrings = init.Trim().Split(' ');
-            
-            if(cardStrings.Count() != 5)
+
+            if (cardStrings.Count() != 5)
             {
                 ValidInput = false;
                 HandValueString = "Please input exactly 5 cards";
             }
 
-            var pokerHand = new PokerHand();
-            foreach(var str in cardStrings)
+            else
             {
-                var newCard = Card.TryParseCard(str);
-                if (newCard == null)
+                var parsedCards = new List<Card>();
+                foreach (var str in cardStrings)
                 {
-                    ValidInput = false;
-                    HandValueString = $"Could not interpret card \"{str}\", please check your input and try again";
+                    var newCard = Card.TryParseCard(str);
+                    if (newCard == null)
+                    {
+                        ValidInput = false;
+                        HandValueString = $"Could not interpret card \"{str}\", please check your input and try again";
+                        break;
+                    }
+                    else
+                    {
+                        parsedCards.Add(newCard);
+                    }
                 }
-                else
-                {
-                    pokerHand.Cards.Add(newCard);
-                }
-            }
 
-            if (ValidInput)
-            {
-                HandValueString = pokerHand.BestHandString();
+                if (ValidInput)
+                {
+                    PokerHand hand = new PokerHand(parsedCards);
+
+                    HandValueString = hand.BestHandString();
+                }
             }
         }
     }
